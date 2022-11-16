@@ -1,8 +1,11 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -16,14 +19,25 @@ import java.util.Set;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    CustomerService customerService;
+    @Autowired
+    EmployeeService employeeService;
+
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        throw new UnsupportedOperationException();
+        Customer customer = new Customer();
+        CustomerDTO customerDTO1 = new CustomerDTO();
+        BeanUtils.copyProperties(customerDTO, customer);
+        BeanUtils.copyProperties(customerService.createCustomer(customer), customerDTO1);
+        return customerDTO1;
     }
 
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
-        throw new UnsupportedOperationException();
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+        BeanUtils.copyProperties(customerService.getAllCustomers(), customerDTOList);
+        return customerDTOList;
     }
 
     @GetMapping("/customer/pet/{petId}")
@@ -33,22 +47,30 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        Employee employee = new Employee();
+        EmployeeDTO employeeDTO1 = new EmployeeDTO();
+        BeanUtils.copyProperties(employeeDTO, employee);
+        BeanUtils.copyProperties(employeeService.createEmployee(employee), employeeDTO1);
+        return employeeDTO1;
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        BeanUtils.copyProperties(employeeService.getEmployee(employeeId), employeeDTO);
+        return employeeDTO;
     }
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        employeeService.setAvailability(daysAvailable, employeeId);
     }
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        BeanUtils.copyProperties(employeeService.findEmployeesForService(employeeDTO), employeeDTOList);
+        return employeeDTOList;
     }
 
 }
