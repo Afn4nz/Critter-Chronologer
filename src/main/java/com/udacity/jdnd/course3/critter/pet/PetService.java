@@ -1,16 +1,26 @@
 package com.udacity.jdnd.course3.critter.pet;
 
+
+import com.udacity.jdnd.course3.critter.user.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PetService {
 
     @Autowired
     PetRepository petRepository;
 
+    @Autowired
+    CustomerService customerService;
+
     public Pet createPet(Pet pet){
-        return petRepository.save(pet);
+        petRepository.save(pet);
+        customerService.insertPet(pet.getCustomer(), pet);
+        System.out.println("!!@@!@@@!@!!@@@The pet id is: "+pet.getId());
+        return pet;
     }
 
     public Pet getPet(Long id){

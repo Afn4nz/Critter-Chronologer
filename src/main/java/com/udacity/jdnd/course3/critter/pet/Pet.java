@@ -11,12 +11,18 @@ import java.time.LocalDate;
 @Data
 public class Pet {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private PetType type;
+
     private String name;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
     private Customer customer;
+
     private LocalDate birthDate;
+
     private String notes;
 }

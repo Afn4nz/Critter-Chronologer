@@ -84,6 +84,8 @@ public class CritterFunctionalTest {
         //check to make sure customer now also contains pet
         CustomerDTO retrievedCustomer = userController.getAllCustomers().get(0);
         Assertions.assertTrue(retrievedCustomer.getPetIds() != null && retrievedCustomer.getPetIds().size() > 0);
+        System.out.println("!@!@!@!@!@!@!@!@!@!The first value is: "+retrievedCustomer.getPetIds().get(0));
+        System.out.println("$#$#$#$#$#$#$#$ The second value is: "+ retrievedPet.getId());
         Assertions.assertEquals(retrievedCustomer.getPetIds().get(0), retrievedPet.getId());
     }
 
@@ -239,7 +241,6 @@ public class CritterFunctionalTest {
         compareSchedules(sched2, scheds2c.get(0));
         compareSchedules(sched3, scheds2c.get(1));
     }
-
 
     private static EmployeeDTO createEmployeeDTO() {
         EmployeeDTO employeeDTO = new EmployeeDTO();

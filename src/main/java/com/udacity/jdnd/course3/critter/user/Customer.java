@@ -3,20 +3,22 @@ package com.udacity.jdnd.course3.critter.user;
 import com.udacity.jdnd.course3.critter.pet.Pet;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
 @Data
-public class Customer extends User{
+public class Customer{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private String name;
+
     private String phoneNumber;
+
     private String notes;
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Pet> pets;
 }
