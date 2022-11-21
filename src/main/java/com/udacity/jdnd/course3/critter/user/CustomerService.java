@@ -37,7 +37,6 @@ public class CustomerService {
     }
 
     public void insertPet(Customer customer, Pet pet){
-        System.out.println("#$#$#$#$#$#$#$#$#$# The pet id is: "+pet.getId());
 
         if(customer.getPets() == null) {
             List<Pet> petList = new ArrayList<>();
