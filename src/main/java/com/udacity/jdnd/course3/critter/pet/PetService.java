@@ -19,7 +19,6 @@ public class PetService {
     public Pet createPet(Pet pet){
         petRepository.save(pet);
         customerService.insertPet(pet.getCustomer(), pet);
-        System.out.println("!!@@!@@@!@!!@@@The pet id is: "+pet.getId());
         return pet;
     }
 
