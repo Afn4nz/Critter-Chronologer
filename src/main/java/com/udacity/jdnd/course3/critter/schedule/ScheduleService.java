@@ -39,17 +39,20 @@ public class ScheduleService {
 
     public List<Schedule> getScheduleForPet(Long id){
         Pet pet = petService.getPet(id);
+        System.out.println("_+_+_+_+_+_+_+ The size of list is:"+scheduleRepository.findByPetsContaining(pet).size());
         return scheduleRepository.findByPetsContaining(pet);
     }
 
     public List<Schedule> getScheduleForEmployee(Long id){
         Employee employee = employeeService.getEmployee(id);
+        System.out.println("_+_+_+_+_+_+_+ The size of list is:"+scheduleRepository.findByEmployeesContaining(employee).size());
         return scheduleRepository.findByEmployeesContaining(employee);
     }
 
     public List<Schedule> getScheduleForCustomer(Long id){
         Customer customer = customerService.getCustomer(id);
         List<Schedule> schedules = scheduleRepository.findByPetsIn(customer.getPets());
+        System.out.println("_+_+_+_+_+_+_+ The size of list is:"+schedules.size());
         return schedules;
     }
 }

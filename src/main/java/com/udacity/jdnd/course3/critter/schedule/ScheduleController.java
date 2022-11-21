@@ -26,6 +26,7 @@ public class ScheduleController {
     @Autowired
     PetService petService;
 
+    @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         return toDTO(scheduleService.createSchedule(toEntity(scheduleDTO)));
     }
