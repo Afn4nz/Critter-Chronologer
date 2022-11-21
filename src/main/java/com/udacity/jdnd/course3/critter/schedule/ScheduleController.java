@@ -71,6 +71,7 @@ public class ScheduleController {
         List<Long> employeeIds = new ArrayList<>();
         List<Long> petIds = new ArrayList<>();
         ScheduleDTO scheduleDTO = new ScheduleDTO();
+        scheduleDTO.setId(schedule.getId());
         scheduleDTO.setActivities(schedule.getActivities());
         scheduleDTO.setDate(schedule.getDate());
 
@@ -90,6 +91,7 @@ public class ScheduleController {
         List<Employee> employeeList = new ArrayList<>();
         List<Pet> petList = new ArrayList<>();
 
+        schedule.setId(scheduleDTO.getId());
         schedule.setDate(scheduleDTO.getDate());
         schedule.setActivities(scheduleDTO.getActivities());
 
